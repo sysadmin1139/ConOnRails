@@ -1,6 +1,13 @@
 require 'faker'
 
 FactoryGirl.define do
+  factory :chat_message do
+    association :user
+    message Faker::Lorem.paragraph
+  end
+end
+
+FactoryGirl.define do
   factory :radio_group, class: RadioGroup do
     factory :blue_man_group do
       name "Blue"

@@ -53,4 +53,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'simplecov-html'
+  gem 'shoulda'
 end
