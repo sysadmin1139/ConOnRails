@@ -78,11 +78,12 @@ ConOnRails::Application.routes.draw do
 
   resources :roles
 
-  resources :schedules do
-    collection do
-      get :admin
+  resources :schedules, except: [:destroy] do
+    member do
+      get :new_position
     end
   end
+
 
   resources :sessions, only: [:new, :create, :destroy]
 

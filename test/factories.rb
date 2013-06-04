@@ -329,6 +329,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :schedule do
+    name { Faker::Name.name }
+    from { DateTime.now }
+    til { DateTime.now + 4.days }
+  end
 end
 
 

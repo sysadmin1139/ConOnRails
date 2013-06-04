@@ -1,0 +1,10 @@
+h2="Schedule #{@schedule.name} from #{@schedule.from.to_date} – #{@schedule.til.to_date}"
+
+h3="Showing #{@date}"
+
+- if current_user.can_admin_schedule?
+  = link_to 'Create Position', new_position_schedule_path, class: 'button'
+
+- content_for :side do
+  - (@schedule.from.to_date..@schedule.til.to_date).each do |date|
+    = link_to date, schedule_path(date: date)

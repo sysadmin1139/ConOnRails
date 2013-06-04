@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604200807) do
+ActiveRecord::Schema.define(:version => 20130604223706) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(:version => 20130604200807) do
     t.boolean  "make_hidden_entries",     :default => false
     t.boolean  "rw_secure",               :default => false
     t.boolean  "read_audits",             :default => false
+    t.boolean  "assign_slots"
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
@@ -252,14 +253,14 @@ ActiveRecord::Schema.define(:version => 20130604200807) do
   create_table "schedules", :force => true do |t|
     t.string   "name"
     t.datetime "from"
-    t.datetime "until"
+    t.datetime "til"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "slots", :force => true do |t|
     t.datetime "from"
-    t.datetime "until"
+    t.datetime "til"
     t.integer  "position_id"
     t.integer  "volunteer_id"
     t.datetime "created_at",   :null => false
@@ -272,8 +273,6 @@ ActiveRecord::Schema.define(:version => 20130604200807) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.boolean  "admin_schedule"
-    t.boolean  "assign_slots"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

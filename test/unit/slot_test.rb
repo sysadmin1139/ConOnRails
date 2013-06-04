@@ -5,6 +5,6 @@ class SlotTest < ActiveSupport::TestCase
     should belong_to :position
     should belong_to :volunteer
     should validate_presence_of :from
-    should validate_presence_of :until
+    should validate_presence_of :til
   end
 end

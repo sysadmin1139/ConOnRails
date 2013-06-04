@@ -105,6 +105,14 @@ class User < ActiveRecord::Base
   end
   alias :can_read_secure? :rw_secure?
 
+  def can_admin_schedule?
+    find_perm 'admin_schedule?'
+  end
+
+  def can_assign_slots?
+    find_perm 'assign_slots?'
+  end
+
   def username
     name
   end

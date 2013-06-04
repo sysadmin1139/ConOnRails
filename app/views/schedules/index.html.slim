@@ -1,0 +1,14 @@
+h2 Schedules
+
+.button
+  = link_to 'New Schedule', new_schedule_path, class: 'button' if current_user.can_admin_schedule?
+
+table
+  tr
+    th Name
+    th From
+    th Until
+  = render @schedules
+
+
+

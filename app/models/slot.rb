@@ -4,5 +4,5 @@ class Slot < ActiveRecord::Base
   belongs_to :position
   belongs_to :volunteer
   validates :from, presence: true
-  validates :until, presence: true
+  validates :til, presence: true
 end
