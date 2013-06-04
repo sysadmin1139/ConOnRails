@@ -1,4 +1,8 @@
 ConOnRails::Application.routes.draw do
+  resources :admin, only: [:index]
+  resources :audits, only: [:index]
+  resources :contacts, except: [:destroy]
+  resources :departments
 
   resources :duty_board, only: [:index] do
     member do
@@ -14,17 +18,6 @@ ConOnRails::Application.routes.draw do
     end
   end
 
-  root controller: :events, action: :index, active: true
-  match '/public', to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy'
-  match '/sessions/getroles', to: 'sessions#getroles'
-  match '/lost_and_found', to: 'lost_and_found#index'
-  match '/admin', to: 'admin#index'
-  match '/banner', to: 'application#banner'
-
-  resources :audits, only: [:index]
-  resources :login_log, only: [:index]
-
   resources :events, except: [:destroy] do
     collection do
       get 'review'
@@ -34,6 +27,17 @@ ConOnRails::Application.routes.draw do
       post 'search_entries'
     end
   end
+
+  root controller: :events, action: :index, active: true
+  match '/public', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy'
+  match '/sessions/getroles', to: 'sessions#getroles'
+  match '/lost_and_found', to: 'lost_and_found#index'
+  match '/admin', to: 'admin#index'
+  match '/banner', to: 'application#banner'
+
+  resources :login_log, only: [:index]
+
   resources :lost_and_found, only: [:index]
   resources :lost_and_found_items, except: [:index, :destroy] do
     collection do
@@ -44,7 +48,12 @@ ConOnRails::Application.routes.draw do
     end
   end
 
-  resources :departments
+  resources :messages do
+    member do
+      get 'close'
+    end
+  end
+
   resources :radio_assignments, only: [:create, :destroy] do
     get 'checkout'
   end
@@ -67,14 +76,21 @@ ConOnRails::Application.routes.draw do
     end
   end
 
-  resources :messages do
-    member do
-      get 'close'
+  resources :roles
+
+  resources :schedules do
+    collection do
+      get :admin
     end
   end
 
-  resources :admin, only: [:index]
   resources :sessions, only: [:new, :create, :destroy]
+
+  resources :users do
+    member do
+      get :change_password
+    end
+  end
 
   resources :volunteers do
     post 'new_from_attendee'
@@ -87,13 +103,6 @@ ConOnRails::Application.routes.draw do
     end
   end
 
-  resources :contacts, except: [:destroy]
-  resources :roles
-  resources :users do
-    member do
-      get :change_password
-    end
-  end
 
 # The priority is based upon order of creation:
 # first created -> highest priority.
