@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20130604200807) do
     t.integer  "user_id"
     t.datetime "orig_time"
     t.string   "rolename"
+    t.boolean  "merged"
   end
 
   create_table "events", :force => true do |t|
